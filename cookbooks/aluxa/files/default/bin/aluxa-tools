@@ -1,0 +1,124 @@
+#!/bin/bash
+###############################################################################
+# Aluxa Server tools
+# (c)2016 C. Byerley
+###############################################################################
+CMD=$1
+SKILL=$2
+ALUXA=/home/aluxa
+CORE=/usr/local/aluxa
+LOGS=$ALUXA/logs/aluxa.log
+JIT=$(which luajit)
+SKILL_TPL=$CORE/alexa_skill
+SKILLS=$CORE/skills
+NGINX=$CORE/nginx/sbin/nginx
+NGINX_CNF=$CORE/nginx/conf/nginx.conf
+
+case "$CMD" in
+  "start")
+    $NGINX -c $NGINX_CNF
+  ;;
+  "stop")
+    $NGINX -s stop
+  ;;
+  "reload")
+    $NGINX -s reload
+  ;;
+  "logs")
+    tail -n 50 -f $LOGS
+  ;;
+  "cert")
+    cat /etc/ssh/aluxa.crt
+  ;;
+  "status")
+    if [ ! "$(ps -d | grep nginx)" ];then
+      echo "Aluxa Server is not Running!"
+    else
+      echo "Aluxa Server Active"
+    fi
+    exit 1
+  ;;
+  "skills")
+    ls -l $SKILLS
+  ;;
+  "skill")
+    if [ "$SKILL" ];then
+      if [ ! -e $SKILLS/$SKILL ];then
+        mkdir -p $SKILLS/$SKILL
+        cp -R $SKILL_TPL/* $SKILLS/$SKILL/.
+        chown -R aluxa:aluxa $SKILLS/$SKILL
+        chmod 0755 $SKILLS/$SKILL
+        echo "Skill $SKILL Created"
+      fi
+    fi
+  ;;
+  "remove")
+    rm -rf $SKILLS/$SKILL
+  ;;
+  "make")
+    if [ ! -e '/usr/local/aluxa/lualib/aluxa/core.lua' ]; then
+      echo 'Aluxa Library Source not found!'
+      exit 1
+    fi
+
+    # stop server if running
+    if [ -e /usr/local/aluxa/nginx/logs/nginx.pid ]
+    then
+      aluxa stop
+    fi
+
+    #give it a few
+    sleep 2
+
+    # empty tmp
+    rm -rf /tmp/aluxa
+
+    # cp and edit
+    cp -R /usr/local/aluxa /tmp
+
+    cd /tmp/aluxa
+    rm -rf /tmp/aluxa/bin
+    rm -rf /tmp/aluxa/pod
+
+    if [ -e '/tmp/aluxa/resty.index' ]
+    then
+      rm '/tmp/aluxa/resty.index'
+    fi
+
+    cd /tmp
+
+    tar czf aluxa-core.tar.gz aluxa
+
+    mv aluxa-core.tar.gz /vagrant/aluxa-core.tar.gz
+
+    rm -rf /tmp/aluxa/*
+
+    # NOT USING COMPILED LIB FOR NOW
+    #compile it
+    # cd '/usr/local/aluxa/lualib/aluxalib'
+    #
+    # #rename for linking
+    # for f in *.lua
+    # do
+    #   cp $f "aluxalib_${f}"
+    # done
+    #
+    # #generator binary objects
+    # for f in aluxalib_*
+    # do
+    #   $JIT -b $f `basename ${f} .lua`.o
+    # done
+    #
+    # #create lib archive
+    # ar rcus libaluxa.a *.o
+    # tar czf libaluxa.tar.gz libaluxa.a
+    # mv libaluxa.tar.gz /vagrant
+    #
+    # rm -rf *.o
+    # rm -rf aluxalib_*
+  ;;
+  *)
+    echo "{status|start|stop|reload|cert|logs|make|skills|skill [name]|remove [skill]}"
+    exit 1
+  ;;
+esac
