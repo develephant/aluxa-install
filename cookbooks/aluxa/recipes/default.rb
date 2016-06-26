@@ -5,22 +5,21 @@
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 apt_update 'update cache daily'
 
-#download dirs
-directory '/tmp/aluxa'
-
 # install git
-package ['git']
+package 'git'
 
-
-# pull core
-
-
-git '/tmp/aluxa/core' do
-
-
+#download dirs
+directory '/tmp/aluxa' do
+  owner 'root'
+  group 'root'
+  mode '775'
 end
 
-#pull lib
-git '/tmp/aluxa/lib' do
-
+# pull core
+git '/usr/local/aluxa' do
+  repository node['aluxa']['repo']
+  revision 'master'
+  user 'root'
+  group 'root'
+  action :sync
 end
