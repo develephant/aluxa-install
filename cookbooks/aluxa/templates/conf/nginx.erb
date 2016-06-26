@@ -1,0 +1,45 @@
+###############################################################################
+# Aluxa Server nginx template
+# (c)2016 C. Byerley
+###############################################################################
+user <%= node[:nginx][:user] %>;
+
+daemon on;
+worker_processes 1;
+
+error_log <%= node[:nginx][:log_file] %> <%= node[:nginx][:log_level] %>;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  include <%= node[:nginx][:conf] %>/mime.types;
+
+  access_log off;
+
+  default_type application/json;
+
+  resolver 10.0.0.1 127.0.0.1 8.8.8.8 8.8.4.4;
+
+  server_tokens off;
+
+  # Lua
+  lua_package_path "<%= node[:nginx][:lua_path] %>";
+
+  lua_code_cache <%= node[:nginx][:lua_cache] %>;
+  lua_socket_log_errors off;
+
+  lua_shared_dict jobs 512k;
+
+  access_by_lua_no_postpone on;
+
+  geoip_country /usr/share/GeoIP/GeoIP.dat;
+
+  init_by_lua_block {
+    log   = function(...) ngx.log(ngx.NOTICE, ...); end
+    json  = require('cjson')
+  }
+
+  include <%= node[:nginx][:conf] %>/aluxa_server.conf;
+}

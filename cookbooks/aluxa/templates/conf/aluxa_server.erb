@@ -1,0 +1,45 @@
+###############################################################################
+# Aluxa Server app template
+# (c)2016 C. Byerley
+###############################################################################
+server {
+  listen 80;
+  #listen 443 ssl;
+  server_name <%= node[:aluxa][:host] %>;
+
+  default_type 'text/html';
+
+  root <%= node[:aluxa][:root] %>;
+  index index.html index.htm;
+
+  ssl_certificate <%= node[:nginx][:ssl_cert] %>;
+  ssl_certificate_key <%= node[:nginx][:ssl_key] %>;
+  #ssl_trusted_certificate <%= node[:nginx][:ssl_trusted] %>;
+
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_prefer_server_ciphers on;
+  ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
+
+  ssl_session_cache shared:SSL:10m;
+  ssl_session_timeout 10m;
+
+  set $country $geoip_country_code;
+
+  location = /home {
+    content_by_lua_block {
+      ngx.say('Yoodle')
+    }
+  }
+
+  location ~* ^/skills/(.*)$ {
+    limit_except POST {
+      deny all;
+    }
+
+    default_type 'application/json';
+
+    set $skill $1;
+
+    content_by_lua_file <%= node[:core][:skills] %>/$skill/api.lua;
+  }
+}

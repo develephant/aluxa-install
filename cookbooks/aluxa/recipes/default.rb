@@ -8,18 +8,16 @@ apt_update 'update cache daily'
 # install git
 package 'git'
 
-#download dirs
+#download tmp
 directory '/tmp/aluxa' do
   owner 'root'
   group 'root'
   mode '775'
 end
 
-# pull core
-git '/usr/local/aluxa' do
-  repository node['aluxa']['repo']
-  revision 'master'
-  user 'root'
-  group 'root'
-  action :sync
-end
+include_recipe 'aluxa::aluxa_user'
+include_recipe 'aluxa::install'
+include_recipe 'aluxa::aluxa_server'
+include_recipe 'aluxa::mongodb'
+include_recipe 'aluxa::selfsigned'
+include_recipe 'aluxa::logrotate'
