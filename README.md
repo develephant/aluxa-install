@@ -6,7 +6,9 @@ __A Lua based framework and server for working with the Amazon Alexa service.__
 
 __Aluxa__ is both a server and SDK that uses the Lua language to quickly create __Amazon Alexa__ "skills" for personal or production use.
 
-The __Aluxa Server__ runs on the enterprise level Nginx app server. The __Aluxa SDK__ is a simple Lua framework, allowing for rapid development.
+The __Aluxa Server__ runs on the enterprise level [Nginx](https://www.nginx.com/) app server. The __Aluxa SDK__ is a simple [Lua](http://www.lua.org/docs.html) framework, allowing for rapid development.
+
+An __Aluxa Server__ can be generated into a number of deployment formats, or quickly "spun up" using pre-built [__Amazon EC2 AMIs__]().
 
 ## Amazon Alexa Service
 
@@ -39,7 +41,7 @@ To install __Aluxa Server__ you can use one of the [pre-generated __Amazon EC2__
 
 You can find instructions for each deployment type in their respective folders. For example, see `/deploy/digitalocean/README.md` for a __DigitalOcean__ image creation guide.
 
-> Image creation is powered by __[Packer](https://www.packer.io/intro/)__ and __[Chef](http://chef.github.io/)__. You can find other services that Packer can create images for on the [Packer](https://www.packer.io/intro/platforms.html) website.
+> Image creation is powered by __[Packer](https://www.packer.io/intro/)__ and __[Chef](http://chef.github.io/)__. You can find other services that Packer can create images for on the [Packer](https://www.packer.io/intro/platforms.html) website and easily create new deployment types.
 
 ### Log In
 
