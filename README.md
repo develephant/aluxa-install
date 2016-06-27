@@ -329,11 +329,11 @@ Cards can be passed to the consumer within an `alexa` response:
 function skill.HelloIntent(alexa)
   local Card = require('aluxa.card')
 
-  local c = Card.new()
-  c:setTitle("Here comes the Sun")
-  c:setText("Its going to be a great day!")
+  local card = Card.new()
+  card:setTitle("Here comes the Sun")
+  card:setText("Its going to be a great day!")
 
-  alexa.tell("Its going to be a great day", nil, c:get())
+  alexa.tell("Its going to be a great day", nil, card)
 end
 
 ...
@@ -433,7 +433,7 @@ __Instance Methods__
 Inserts a new data record.
 
 ```lua
-local ok, res = db.insert({sessionId = <sessionId>})
+local ok, res = db.insert({sessionId = "<sessionId>"})
 if not ok then
   --error code
   log('error', res.result)
@@ -448,7 +448,7 @@ end
 Finds a record, or set of records, based on the passed query table.
 
 ```lua
-local ok, res = db.find({sessionId = <sessionId>})
+local ok, res = db.find({sessionId = "<sessionId>"})
 ```
 
 #### `.update( update_query, update_obj[, single] )`
@@ -456,13 +456,13 @@ local ok, res = db.find({sessionId = <sessionId>})
 Updates a record, or set of records, based on the passed update query.
 
 ```lua
-local ok, res = db.update({sessionId=<sessionId>}, {score=200})
+local ok, res = db.update({sessionId = "<sessionId>"}, {score = 200})
 ```
 
 #### `.delete( delete_query[, single] )`
 
-Removes a record, or set of records, based on the passed in delete query.
+Removes a record, or set of records, based on the passed delete query.
 
 ```lua
-local ok, res = db.delete({sessionId=<sessionId>})
+local ok, res = db.delete({sessionId = "<sessionId>"})
 ```
