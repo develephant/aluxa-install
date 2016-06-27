@@ -1,2 +1,4 @@
 deploy/virtualbox/.vagrant
 variables.json
+aws.json
+do.json

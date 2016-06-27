@@ -1,6 +1,6 @@
 {
   "variables": {
-    "host_name": null,
+    "do_host_name": null,
     "do_token": null,
     "do_size": "512mb",
     "do_region": "tor1"

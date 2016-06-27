@@ -1,6 +1,6 @@
 {
   "variables": {
-    "host_name": null,
+    "aws_host_name": null,
     "aws_access_key": null,
     "aws_secret_key": null,
     "aws_source_ami": "ami-fce3c696",
