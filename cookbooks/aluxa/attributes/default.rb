@@ -1,17 +1,16 @@
 ###############################################################################
 # Build & Deploy
 ###############################################################################
-default['deploy']['letsencrypt']  = false # [true=letsencrypt|false=self-signed]
-default['deploy']['ssl_only']     = false # force ssl port 443 only
+default['deploy']['letsencrypt']  = true # [true=letsencrypt|false=selfsigned]
+default['deploy']['ssl_only']     = true # force ssl port 443 only
+###############################################################################
+default['aluxa']['host']          = 'aluxa.coronium.cloud'
+default['aluxa']['email']         = 'no-reply@coronium.cloud'
 ###############################################################################
 # GENERAL
 ###############################################################################
 default['aluxa']['user']          = 'aluxa'
 default['aluxa']['group']         = 'aluxa'
-###############################################################################
-default['aluxa']['host']          = 'aluxa.coronium.cloud'
-###############################################################################
-default['aluxa']['email']         = 'no-reply@coronium.cloud'
 ###############################################################################
 default['aluxa']['password']      = '$1$SmKi8o0C$gvUV4isRupzSycD/hXWI5.'
 ###############################################################################
