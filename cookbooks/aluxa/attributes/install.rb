@@ -1,3 +1,6 @@
+###############################################################################
+# Paths
+###############################################################################
 default['install']['bin_dir']         = '/usr/local/bin'
 default['install']['nginx_bin']       = '/usr/local/aluxa/nginx/sbin/nginx'
 default['install']['luajit_bin']      = '/usr/local/aluxa/luajit/bin/luajit'

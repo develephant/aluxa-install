@@ -2,19 +2,19 @@
 # Aluxa Server nginx template
 # (c)2016 C. Byerley
 ###############################################################################
-user <%= node[:nginx][:user] %>;
+user <%= node['nginx']['user'] %>;
 
 daemon on;
 worker_processes 1;
 
-error_log <%= node[:nginx][:log_file] %> <%= node[:nginx][:log_level] %>;
+error_log <%= node['nginx']['log_file'] %> <%= node['nginx']['log_level'] %>;
 
 events {
   worker_connections 1024;
 }
 
 http {
-  include <%= node[:nginx][:conf] %>/mime.types;
+  include <%= node['nginx']['conf'] %>/mime.types;
 
   access_log off;
 
@@ -25,9 +25,9 @@ http {
   server_tokens off;
 
   # Lua
-  lua_package_path "<%= node[:nginx][:lua_path] %>";
+  lua_package_path "<%= node['nginx']['lua_path'] %>";
 
-  lua_code_cache <%= node[:nginx][:lua_cache] %>;
+  lua_code_cache <%= node['nginx']['lua_cache'] %>;
   lua_socket_log_errors off;
 
   lua_shared_dict jobs 512k;
@@ -41,5 +41,5 @@ http {
     json  = require('cjson')
   }
 
-  include <%= node[:nginx][:conf] %>/aluxa_server.conf;
+  include <%= node['nginx']['conf'] %>/aluxa_server.conf;
 }

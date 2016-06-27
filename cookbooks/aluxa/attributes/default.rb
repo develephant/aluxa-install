@@ -1,8 +1,8 @@
 ###############################################################################
 # Build & Deploy
 ###############################################################################
-default['deploy']['vagrant'] = true #for Vagrant
-default['deploy']['letsencrypt'] = false # [true=letsencrypt|false=self-signed]
+default['deploy']['letsencrypt']  = false # [true=letsencrypt|false=self-signed]
+default['deploy']['ssl_only']     = false # force ssl port 443 only
 ###############################################################################
 # GENERAL
 ###############################################################################

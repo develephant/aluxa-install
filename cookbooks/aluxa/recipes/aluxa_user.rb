@@ -1,11 +1,11 @@
 ###############################################################################
 # Create the `aluxa` admin user
 ###############################################################################
-user node[:aluxa][:user] do
+user node['aluxa']['user'] do
   comment 'Aluxa admin'
-  home node[:aluxa][:root]
+  home node['aluxa']['root']
   shell '/bin/bash'
-  password node[:aluxa][:password]
+  password node['aluxa']['password']
   manage_home true
 end
 
@@ -14,6 +14,6 @@ end
 ###############################################################################
 group 'sudo' do
   action :modify
-  members node[:aluxa][:user]
+  members node['aluxa']['user']
   append true
 end

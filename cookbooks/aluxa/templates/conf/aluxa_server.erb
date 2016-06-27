@@ -3,22 +3,24 @@
 # (c)2016 C. Byerley
 ###############################################################################
 server {
-  #listen 80;
+  <% unless node['deploy']['ssl_only'] then %>
+  listen 80; #listen on both ports
+  <% end %>
   listen 443 ssl;
-  server_name <%= node[:aluxa][:host] %>;
+  server_name <%= node['aluxa']['host'] %>;
 
   default_type 'text/html';
 
-  root <%= node[:aluxa][:root] %>;
+  root <%= node['aluxa']['root'] %>;
   index index.html index.htm;
 
   <% if node['deploy']['letsencrypt'] == true then %>
-    ssl_certificate <%= node[:letsencrypt][:ssl_cert] %>;
-    ssl_certificate_key <%= node[:letsencrypt][:ssl_key] %>;
-    ssl_trusted_certificate <%= node[:letsencrypt][:ssl_trusted] %>;
+  ssl_certificate <%= node['letsencrypt']['ssl_cert'] %>;
+  ssl_certificate_key <%= node['letsencrypt']['ssl_key'] %>;
+  ssl_trusted_certificate <%= node['letsencrypt']['ssl_trusted'] %>;
   <% else %>
-    ssl_certificate <%= node[:nginx][:ssl_cert] %>;
-    ssl_certificate_key <%= node[:nginx][:ssl_key] %>;
+  ssl_certificate <%= node['nginx']['ssl_cert'] %>;
+  ssl_certificate_key <%= node['nginx']['ssl_key'] %>;
   <% end %>
 
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
@@ -45,6 +47,6 @@ server {
 
     set $skill $1;
 
-    content_by_lua_file <%= node[:core][:skills] %>/$skill/api.lua;
+    content_by_lua_file <%= node['core']['skills'] %>/$skill/api.lua;
   }
 }
