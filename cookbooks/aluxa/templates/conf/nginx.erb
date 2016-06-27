@@ -39,6 +39,7 @@ http {
   init_by_lua_block {
     log   = function(...) ngx.log(ngx.NOTICE, ...); end
     json  = require('cjson')
+    mongo = require('resty.mongol')
   }
 
   include <%= node['nginx']['conf'] %>/aluxa_server.conf;
