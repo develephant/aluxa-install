@@ -41,15 +41,18 @@ Customize the installation options in the `variables.json` file:
 
 _To create the AMI..._
 
-  1. Navigate to the `amazon_ec2/packer` folder using a terminal program.
-  1. Enter and run the following:
-    ```shell
-    packer validate -var-file=aws.json -var-file=variables.json aluxa.json
-    ```
-    If the `.json` files "validate" then continue, if not, fix em up.
-  1. Once "valid", run the following:
-    ```shell
-    packer build -var-file=aws.json -var-file=variables.json aluxa.json
-    ```
+Navigate to the `amazon_ec2/packer` folder using a terminal program.
+
+Enter and run the following:
+
+```shell
+packer validate -var-file=aws.json -var-file=variables.json aluxa.json
+```
+___If the `.json` files "validate" then continue, if not, fix em up.___
+
+Once "valid", run the following:
+```shell
+packer build -var-file=aws.json -var-file=variables.json aluxa.json
+```
 
 __The AMI should become available within 10 minutes, and is marked `private`.__

@@ -40,15 +40,20 @@ __Properties__
 
 _To create the Droplet Image..._
 
-  1. Navigate to the `digitalocean/packer` folder using a terminal program.
-  1. Enter and run the following:
-    ```
-    packer validate -var-file=do.json -var-file=variables.json aluxa.json
-    ```
-    If the `.json` files "validate" then continue, if not, fix em up.
-  1. Once "valid", run the following:
-    ```
-    packer build -var-file=do.json -var-file=variables.json aluxa.json
-    ```
+Navigate to the `digitalocean/packer` folder using a terminal program.
+
+Enter and run the following:
+
+```
+packer validate -var-file=do.json -var-file=variables.json aluxa.json
+```
+
+___If the `.json` files "validate" then continue, if not, fix em up.__
+
+Once "valid", run the following:
+
+```
+packer build -var-file=do.json -var-file=variables.json aluxa.json
+```
 
 __The image should become available within 10 minutes in the "snapshots" area.__
