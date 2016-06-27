@@ -274,9 +274,9 @@ __Parameters__
 |`card`|A card object. See "Using Cards" below.|N|
 |`type`|The speech input type (PlainText,SMML).|N|
 
-## Using Cards
+## Using Home Cards
 
-Cards are displayed on the __Alexa__ mobile app and are associated to the request made. Displaying a card is optional. A Card has a specfic structure and methods as outlined below:
+Home Cards are displayed on the __Alexa__ mobile app and are associated to the request made. Displaying a card is optional, but can provide additional response context. A Card has a specfic structure and methods as outlined below:
 
 ### `Card.new([type])`
 
@@ -321,13 +321,14 @@ The `type` of Card to display. Defaults to 'Simple'. Other options: 'Standard', 
 
 Return the meta data associated with this Card instance.
 
-Cards can be passed to the consumer with an `alexa` response:
+Cards can be passed to the consumer within an `alexa` response:
 
 ```lua
 ...
 
 function skill.HelloIntent(alexa)
   local Card = require('aluxa.card')
+
   local c = Card.new()
   c:setTitle("Here comes the Sun")
   c:setText("Its going to be a great day!")
@@ -399,4 +400,69 @@ end
 
 ...
 
+```
+## Mongo Datastore
+
+The __Aluxa Server__ contains a [MongoDB](https://www.mongodb.com/) instance that can be used to store data relevant to consumer requests. Only a simplified Mongo API is exposed. How request data is stored and used is completly up to the developer.
+
+### `mongo`
+
+The `mongo` object is available anywhere in your skill, with the following methods:
+
+#### `mongo:new( database, collection )`
+
+Returns a new datastore instance.
+
+```lua
+local db = mongo:new('my_skill', 'requests')
+```
+
+__Parameters__
+
+|Name|Description|Required|
+|----|-----------|--------|
+|`database`|Name of the Mongo database to use. (string)|Y|
+|`collection`|Name of the database collection to use. (string)|Y|
+
+> If the `database` and/or `collection` does not exist, it will be created automatically.
+
+__Instance Methods__
+
+#### `.insert( insert_tbl )`
+
+Inserts a new data record.
+
+```lua
+local ok, res = db.insert({sessionId = <sessionId>})
+if not ok then
+  --error code
+  log('error', res.result)
+else
+  --result code
+  log('result code', res.result)
+end
+```
+
+#### `.find( query_tbl )`
+
+Finds a record, or set of records, based on the passed query table.
+
+```lua
+local ok, res = db.find({sessionId = <sessionId>})
+```
+
+#### `.update( update_query, update_obj[, single] )`
+
+Updates a record, or set of records, based on the passed update query.
+
+```lua
+local ok, res = db.update({sessionId=<sessionId>}, {score=200})
+```
+
+#### `.delete( delete_query[, single] )`
+
+Removes a record, or set of records, based on the passed in delete query.
+
+```lua
+local ok, res = db.delete({sessionId=<sessionId>})
 ```
