@@ -19,6 +19,11 @@ include_recipe 'aluxa::aluxa_user'
 include_recipe 'aluxa::install'
 include_recipe 'aluxa::aluxa_server'
 include_recipe 'aluxa::mongodb'
-# include_recipe 'aluxa::selfsigned'
-include_recipe 'aluxa::letsencrypt'
+
+if node['deploy']['letsencrypt'] == true then
+  include_recipe 'aluxa::letsencrypt'
+else
+  include_recipe 'aluxa::selfsigned'
+end
+
 include_recipe 'aluxa::logrotate'

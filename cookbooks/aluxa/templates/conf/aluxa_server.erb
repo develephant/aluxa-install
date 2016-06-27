@@ -12,7 +12,7 @@ server {
   root <%= node[:aluxa][:root] %>;
   index index.html index.htm;
 
-  <% if node['aluxa']['letsencrypt'] == true then %>
+  <% if node['deploy']['letsencrypt'] == true then %>
     ssl_certificate <%= node[:letsencrypt][:ssl_cert] %>;
     ssl_certificate_key <%= node[:letsencrypt][:ssl_key] %>;
     ssl_trusted_certificate <%= node[:letsencrypt][:ssl_trusted] %>;
