@@ -1,0 +1,14 @@
+{
+  "type": "IntentRequest",
+  "requestId": "string",
+  "timestamp": "string",
+  "intent": {
+    "name": "string",
+    "slots": {
+      "string": {
+        "name": "string",
+        "value": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "type": "LaunchRequest",
+  "requestId": "string",
+  "timestamp": "string"
+}

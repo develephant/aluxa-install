@@ -1,0 +1,6 @@
+{
+  "type": "SessionEndedRequest",
+  "requestId": "string",
+  "timestamp": "string",
+  "reason": "string"
+}
