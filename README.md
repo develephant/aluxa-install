@@ -411,7 +411,7 @@ The `mongo` object is available anywhere in your skill, with the following metho
 
 #### `mongo:new( database, collection )`
 
-Returns a new datastore instance.
+Returns a datastore instance.
 
 ```lua
 local db = mongo:new('my_skill', 'requests')
