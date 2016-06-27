@@ -8,6 +8,16 @@ __Aluxa__ is both a server and SDK that uses the Lua language to quickly create 
 
 The __Aluxa Server__ runs on the enterprise level Nginx app server. The __Aluxa SDK__ is a simple Lua framework, allowing for rapid development.
 
+## Amazon Alexa Service
+
+Please make yourself familiar with the __Alexa Service__ and the __Alexa__ developer portal by referencing the following documents, at minimum.
+
+  - [Getting Started with the Alexa Skills Kit](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/getting-started-guide)
+  - [Registering and Managing Custom Skills in the Developer Portal](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/registering-and-managing-alexa-skills-in-the-developer-portal)
+  - [Implementing the Built-in Intents](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/implementing-the-built-in-intents)
+  - [Providing Home Cards for the Amazon Alexa App](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/providing-home-cards-for-the-amazon-alexa-app)
+  - [Testing a Custom Skill](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/docs/testing-an-alexa-skill)
+  - [JSON Interface Reference for Custom Skills](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interface-reference)
 
 ## Requirements
 
