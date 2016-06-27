@@ -23,17 +23,19 @@ Please make yourself familiar with the __Alexa Service__ and the __Alexa__ devel
 
 ## Requirements
 
- * A current __Alexa__ device (Echo, Dot, or Tap).
- * __Amazon Web Services__ account with admin access.
- * A fully qualified domain name (FQDN) that you control.
+ * A current __Alexa__ enabled device ([Echo](https://www.amazon.com/Amazon-Echo-Bluetooth-Speaker-with-WiFi-Alexa/dp/B00X4WHP5E), [Dot](https://www.amazon.com/b/?node=14047587011), or [Tap](https://www.amazon.com/dp/B01BH83OOM/ref=fs_ods_fs_aucc_fx)).
+ * [__Amazon Web Services__](https://aws.amazon.com/free/) account with admin access.
+ * A fully qualified domain name ([FQDN](https://en.wikipedia.org/wiki/Fully_qualified_domain_name)) that you control.
  * A valid email address to register for SSL certificates.
 
 __On your computer you will need:__
 
- * The program [Vagrant](https://www.vagrantup.com) if you are going to do local development. ___You can not test on a device in local mode___. But you can test Aluxa server requests using a tool like [Postman](https://www.getpostman.com/).
- * The program [Packer](https://www.packer.io/intro/) if you plan to generate images for various services.
- * An __SFTP__ program to manage your "skill" project files.
- * A __Command Line__ program to manage your server with.
+  * A __Command Line__ program to manage your server with (Terminal/[PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)).
+  * An [__SFTP__](https://filezilla-project.org/) client to manage your "skill" project files.
+  * [Packer](https://www.packer.io/intro/) if you plan to generate images for various services.
+  * [Vagrant](https://www.vagrantup.com) if you are going to do local __server__ development (optional). ___You can not test on a device in local mode___, but you can test Aluxa server requests using a tool like [Postman](https://www.getpostman.com/).
+
+
 
 ## Installation
 
