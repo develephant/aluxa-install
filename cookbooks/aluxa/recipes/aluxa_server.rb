@@ -8,3 +8,9 @@ template "#{node[:nginx][:conf]}/aluxa_server.conf" do
   source 'conf/aluxa_server.erb'
   mode '0644'
 end
+
+directory "#{node['core']['root']}/nginx/logs"
+
+file "#{node['core']['root']}/nginx/logs/error.log" do
+  action :touch
+end

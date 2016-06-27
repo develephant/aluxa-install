@@ -2,7 +2,7 @@
 # Build & Deploy
 ###############################################################################
 default['deploy']['vagrant'] = true #for Vagrant
-default['deploy']['artifacts'] = '/vagrant'
+default['deploy']['letsencrypt'] = true # [true=letsencrypt|false=self-signed]
 ###############################################################################
 # GENERAL
 ###############################################################################

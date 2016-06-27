@@ -12,9 +12,14 @@ server {
   root <%= node[:aluxa][:root] %>;
   index index.html index.htm;
 
-  ssl_certificate <%= node[:nginx][:ssl_cert] %>;
-  ssl_certificate_key <%= node[:nginx][:ssl_key] %>;
-  #ssl_trusted_certificate <%= node[:nginx][:ssl_trusted] %>;
+  <% if node['aluxa']['letsencrypt'] == true then %>
+    ssl_certificate <%= node[:letsencrypt][:ssl_cert] %>;
+    ssl_certificate_key <%= node[:letsencrypt][:ssl_key] %>;
+    ssl_trusted_certificate <%= node[:letsencrypt][:ssl_trusted] %>;
+  <% else %>
+    ssl_certificate <%= node[:nginx][:ssl_cert] %>;
+    ssl_certificate_key <%= node[:nginx][:ssl_key] %>;
+  <% end %>
 
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
   ssl_prefer_server_ciphers on;
