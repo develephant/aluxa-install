@@ -1,0 +1,29 @@
+{
+  "variables": {
+    "host_name": null,
+    "do_token": null,
+    "do_size": "512mb",
+    "do_region": "tor1"
+  },
+  "builders": [{
+    "type": "digitalocean",
+    "image": "ubuntu-14-04-x64",
+    "region": "{{user `do_region`}}",
+    "size": "{{user `do_size`}}",
+    "snapshot_name": "AluxaServer-{{timestamp}}",
+    "api_token": "{{user `do_token`}}"
+  }],
+  "provisioners": [{
+    "type": "chef-solo",
+    "cookbook_paths": ["../../../cookbooks"],
+    "run_list": ["aluxa::default"],
+    "json": {
+      "aluxa": {
+        "host": "{{user `host_name`}}"
+      },
+      "certs": {
+        "domain": "{{user `host_name`}}"
+      }
+    }
+  }]
+}

@@ -3,8 +3,8 @@
 # (c)2016 C. Byerley
 ###############################################################################
 server {
-  listen 80;
-  #listen 443 ssl;
+  #listen 80;
+  listen 443 ssl;
   server_name <%= node[:aluxa][:host] %>;
 
   default_type 'text/html';
