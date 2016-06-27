@@ -1,0 +1,6 @@
+{
+  "aws_host_name": "aluxa.coronium.cloud",
+  "aws_source_ami": "ami-fce3c696",
+  "aws_region": "us-east-1",
+  "aws_instance_type": "t2.micro"
+}
