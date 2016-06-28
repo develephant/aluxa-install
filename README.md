@@ -436,10 +436,10 @@ Inserts a new data record.
 local ok, res = db.insert({sessionId = "<sessionId>"})
 if not ok then
   --error code
-  log('error', res.result)
+  log('error', res)
 else
   --result code
-  log('result code', res.result)
+  log('result code', res)
 end
 ```
 
