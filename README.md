@@ -119,7 +119,7 @@ __Alexa Request Lifecycle__
 
 __Alexa Intents__
 
-There are basically 3 major request types for __Alexa__ intents; `LaunchRequest`, `IntentRequest`, and `SessionEndedRequest`.
+There are basically three request types for __Alexa__ intents; `LaunchRequest`, `IntentRequest`, and `SessionEndedRequest`.
 
 A __LaunchRequest__ is triggered when a user has newly launched your skill, or is addressing your skill with no additional voice parameters. You will generally receive this event once per session. This is a good time to gather the user, session, and application ID from the `LaunchRequest` table object that is passed in.
 
@@ -256,7 +256,7 @@ __Parameters__
 |`speech`|The text to be spoken to the consumer.|Y|
 |`attr`|Associative table of attributes.|N|
 |`card`|A card object. See "Using Cards" below.|N|
-|`type`|The speech input type (PlainText,SMXL).|N|
+|`type`|The speech source input type (PlainText).|N|
 
 ### `alexa.ask`
 
@@ -272,7 +272,7 @@ __Parameters__
 |`prompt`|Text spoken when consumer delays.|Y|
 |`attr`|Associative table of attributes.|N|
 |`card`|A card object. See "Using Cards" below.|N|
-|`type`|The speech input type (PlainText,SMML).|N|
+|`type`|The speech source input type (PlainText).|N|
 
 ## Using Home Cards
 
@@ -282,7 +282,7 @@ Home Cards are displayed on the __Alexa__ mobile app and are associated to the r
 
 ```lua
 local Card = require('aluxa.card')
-local c = Card.new()
+local card = Card.new()
 ```
 
 __Parameters__
@@ -448,7 +448,34 @@ end
 Finds a record, or set of records, based on the passed query table.
 
 ```lua
-local ok, res = db.find({sessionId = "<sessionId>"})
+local ok, res, resSet = db.find({sessionId = "<sessionId>"})
+```
+
+__Returns__
+
+|Name|Description|Type|
+|----|-----------|----|
+|`ok`|The success status of the call.|boolean|
+|`res`|The raw result table array of records.|table|
+|`resSet`|A `ResultSet` object (see below).|ResultSet|
+
+The `find` method also returns a `ResultSet` object with the following methods:
+
+|Name|Description|
+|----|-----------|
+|`:first()`|Return the first result record, if any.|
+|`:last()`|Return the last result record, if any.|
+|`:get(pos)`|Return the result record at position.|
+|`:all()`|Return the entire result array.|
+|`:count()`|Return the total records in the result set.|
+|`:put(pos, record)`|Add a record to the result set at position.|
+|`:del(pos)`|Remove a result record at position.|
+|`:flush()`|Clear the result set of all records.|
+
+```lua
+local ok, res, resSet = db.find({sessionId="<sessionId>"})
+local rec_id = resSet:first()._id
+log('record id '..rec_id)
 ```
 
 #### `.update( update_query, update_obj[, single] )`
