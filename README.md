@@ -172,7 +172,7 @@ return skill
 
 The final, and most important request type is the __IntentRequest__. This request holds all other request types, custom types included. The request object contains a "type" which was assigned by the __Alexa__ service based on the user input.
 
-To listen for these "intents" we simply create a "listener" method with the intent type. For example, for an Intent with a type of `HelloIntent` we write the following using the SDK:
+To listen for these `Intents` we simply create a "listener" method with the intent type. For example, for an `Intent` with a type of `HelloIntent`, we write the following:
 
 ```lua
 --skills/hello/Intents.lua
@@ -189,7 +189,7 @@ end
 return skill
 ```
 
-If the skill contains multiple intent types, we register them seperatly. For example, if a new intent named `GoodbyeIntent` is added to the skill, we can listen for it as well:
+If the skill contains multiple `Intent` types, we register them seperatly. For example, if a new `Intent` named `GoodbyeIntent` is added to the skill, we can listen for it as well:
 
 ```lua
 --skills/hello/Intents.lua
@@ -210,7 +210,7 @@ end
 return skill
 ```
 
-All together, a skill file might look something like this:
+All together, a skill file might look something like:
 
 ```lua
 --skills/hello/Intents.lua
@@ -459,6 +459,8 @@ __Returns__
 |`res`|The raw result table array of records.|table|
 |`resSet`|A `ResultSet` object (see below).|ResultSet|
 
+#### `ResultSet`
+
 The `find` method also returns a `ResultSet` object with the following methods:
 
 |Name|Description|
@@ -477,6 +479,8 @@ local ok, res, resSet = db.find({sessionId="<sessionId>"})
 local rec_id = resSet:first()._id
 log('record id '..rec_id)
 ```
+
+> Manipulating a `ResultSet` in no way affects the original record(s) in the datastore.
 
 #### `.update( update_query, update_obj[, single] )`
 
