@@ -19,10 +19,10 @@
     "run_list": ["aluxa::default"],
     "json": {
       "aluxa": {
-        "host": "{{user `host_name`}}"
+        "host": "{{user `do_host_name`}}"
       },
       "certs": {
-        "domain": "{{user `host_name`}}"
+        "domain": "{{user `do_host_name`}}"
       }
     }
   }]

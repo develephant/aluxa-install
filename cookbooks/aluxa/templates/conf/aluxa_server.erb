@@ -7,7 +7,7 @@ server {
   listen 80; #listen on both ports
   <% end %>
   listen 443 ssl;
-  #server_name <%= node['aluxa']['host'] %>;
+  server_name <%= node['aluxa']['host'] %>;
 
   default_type 'text/html';
 
